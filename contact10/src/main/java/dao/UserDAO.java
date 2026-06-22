@@ -12,7 +12,7 @@ public class UserDAO {
 
 	//データベース接続情報
 	private static String RDB_DRIVE = "com.mysql.cj.jdbc.Driver";
-	private static String URL = "jdbc:mysql://localhost/contactdb";
+	private static String URL = "jdbc:mysql://localhost/mycontactdb";
 	private static String USER = "root";
 	private static String PASS = "root123";
 
@@ -38,7 +38,7 @@ public class UserDAO {
 		User user = new User();
 
 		//SQL文発行
-		String sql = "SELECT * FROM userinfo WHERE userid ='" + userid + "' AND password='" + password + "'";
+		String sql = "SELECT * FROM logininfo WHERE userid ='" + userid + "' AND password='" + password + "'";
 		try {
 			//データベース接続
 			con = getConnection();
@@ -74,7 +74,6 @@ public class UserDAO {
 		return user;
 	}
 
-
 	//DBのlogininfoテーブルから指定ユーザーのパスワード情報のみを更新するメソッド
 	public int updateForPassword(String userid, String password) {
 
@@ -86,7 +85,7 @@ public class UserDAO {
 		int count = 0;
 
 		//SQL文
-		String sql = "UPDATE userinfo SET password = '" + password + "' WHERE userid = '" + userid + "'";
+		String sql = "UPDATE logininfo SET password = '" + password + "' WHERE userid = '" + userid + "'";
 
 		try {
 			//データベース接続

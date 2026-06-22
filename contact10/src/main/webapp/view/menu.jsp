@@ -16,13 +16,12 @@
 				<a href="<%=request.getContextPath()%>/list">お問い合わせ一覧</a>
 			</p>
 			<p>
-				<a href="<%=request.getContextPath()%>/changePassword">パスワード変更</a>
+				<a href="<%=request.getContextPath()%>/view/changePassword.jsp">パスワード変更</a>
 			</p>
 			<p>
 				<a href="<%=request.getContextPath()%>/logout">ログアウト</a>
 			</p>
 		</div>
 	</main>
-
 </body>
 </html>

@@ -8,62 +8,46 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//import bean.Book;
-//import dao.BookDAO;
+import bean.Form;
+import dao.FormDAO;
 
 @WebServlet("/detail")
 public class DetailServlet extends HttpServlet {
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//エラー処理に使用する変数の定義
-		String error = null;
-		String cmd = "";
+		String error = "";
+
+		//FormDAOクラスのオブジェクトを生成します。
+		FormDAO objDao = new FormDAO();
+
+		//表示する問い合わせ情報を格納するFormオブジェクトを生成します。
+		Form form = new Form();
 
 		try {
-			//パラメータの取得
-			String isbn = request.getParameter("isbn");
-			cmd = request.getParameter("cmd");
+			//画面から送信される情報を受け取るためのエンコードを設定します。
+			request.setCharacterEncoding("UTF-8");
 
-			//オブジェクト宣言
-			//BookDAO objDao = new BookDAO();
+			//画面から送信されるNo情報を受け取ります。
+			String no = request.getParameter("no");
 
-			//Book book = objDao.selectByIsbn(isbn);
+			//⑤BookDAOクラスに定義したselectByIsbn（）メソッドを利用して書籍情報を取得します。
+			//form = objDao.selectByNo(no);
 
-			//エラー処理
-			//if (book.getIsbn() == null) {
-			//	if (cmd.equals("update")) {
-			//	error = "更新対象の書籍が存在しない為、変更画面は表示できませんでした。";
-			//	request.setAttribute("cmd", cmd);
-			//	return;
-			//	} else {
-			//		error = "表示対象の書籍が存在しない為、詳細情報は表示できませんでした。";
-			//	request.setAttribute("cmd", cmd);
-			//	return;
-			//	}
-			//}
-
-			//リクエストスコープに登録
-			//request.setAttribute("book", book);
-
-			//cmdの値の判定
-			//if (cmd.equals("update")) {
-			//	request.getRequestDispatcher("/view/update.jsp").forward(request, response);
-			//	} else {
-				request.getRequestDispatcher("/view/detail.jsp").forward(request, response);
-			//}
+			//⑥取得した書籍情報を「book」という名前でリクエストスコープに登録します。  
+			request.setAttribute("form", form);
 
 		} catch (IllegalStateException e) {
-			if (cmd.equals("update")) {
-				error = "DB接続エラーの為、変更画面は表示できませんでした。";
-			} else {
-				error = "DB接続エラーの為、書籍詳細は表示できませんでした。";
-			}
-			request.setAttribute("cmd", "logout");
-
+			error = "DB接続エラーのため書籍登録処理は行えませんでした。";
+		} catch (NumberFormatException e) {
+			error = "表示対象の書籍が存在しない為、詳細情報は表示できませんでした。";
 		} finally {
-			if (error != null) {
+			if (error.equals("")) {
+				//⑥「detail.jsp」へフォワードします。
+				request.getRequestDispatcher("/detail.jsp").forward(request, response);
+
+			} else {
+				//リクエストスコープへの登録
 				request.setAttribute("error", error);
 				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 			}
@@ -71,5 +55,4 @@ public class DetailServlet extends HttpServlet {
 		}
 
 	}
-
 }

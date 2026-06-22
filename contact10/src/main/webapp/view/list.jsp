@@ -6,14 +6,7 @@
 <title>お問い合わせ一覧</title>
 </head>
 <body>
-	<!-- ヘッダー jspにするときはここ消してincludeでいれてね-->
-	<header>
-		<h1>
-			神田英会話スクール<br> お問い合わせ管理システム
-		</h1>
-	</header>
-
-
+	<%@include file="/common/header.jsp"%>
 	<div class="breadcrumb">
 		<a href="menu.jsp">メニュー</a> ｜ お問い合わせ一覧
 	</div>
@@ -25,23 +18,29 @@
 
 		<div class="list">
 			<div class="search">
-				<form action="#" class="list-seach">
+				<form action="<%=request.getContextPath()%>/search"
+					class="list-seach">
 					<p>
-						<input type="text" name="＃">
+						<input type="text" name="text">
 					</p>
 					<p>
 						<input type="submit" name="search" value="検索">
 					</p>
 				</form>
 			</div>
+			<%
+			Form form = new Form();
+			%>
 			<div>
-				<form action="#">
-					<input type="submit" name="＃" value="未返信一覧">
+				<form
+					action="<%=request.getContextPath()%>/search?status=<%=form.getStatus()%>">
+					<input type="submit" name="noreply" value="未返信一覧">
 				</form>
 			</div>
 			<div>
-				<form action="#">
-					<input type="submit" name="＃" value="返信済一覧">
+				<form
+					action="<%=request.getContextPath()%>/search?status=<%=form.getStatus()%>">
+					<input type="submit" name="reply" value="返信済一覧">
 				</form>
 			</div>
 		</div>
@@ -53,37 +52,35 @@
 				<th>種類</th>
 				<th>お問い合わせ日時</th>
 				<th>お問い合わせ内容</th>
-				<th>返信済/未返信</th>
+				<th>未返信/返信済</th>
 			</tr>
+
 			<%
 			ArrayList<Form> list = (ArrayList<Form>) request.getAttribute("form_list");
 			if (list != null) {
 				for (int i = 0; i < list.size(); i++) {
-					Form form = (Form) list.get(i);
+					Form form1 = (Form) list.get(i);
 					if (i % 2 == 1) {
 			%>
 			<!--ここでif文 (データある分表示)-->
 			<tr class="list-table-green">
-				<td><%=form.getNo()%></td>
-				<td><%=form.getName()%></td>
-				<td><%=form.getKind()%></td>
-				<td><%=form.getDate()%></td>
-				<td><%=form.getReport()%></td>
-				<td><%=form.getStatus()%></td>
+				<td><%=form1.getNo()%></td>
+				<td><%=form1.getName()%></td>
+				<td><%=form1.getKind()%></td>
+				<td><%=form1.getDate()%></td>
+				<td><%=form1.getReport()%></td>
+				<td><%=form1.getStatus()%></td>
 			</tr>
 			<%
 			} else {
 			%>
-
-			<!-- i++ して次の行は背景色変えたい-->
-
 			<tr class="list-table-white">
-				<td><%=form.getNo()%></td>
-				<td><%=form.getName()%></td>
-				<td><%=form.getKind()%></td>
-				<td><%=form.getDate()%></td>
-				<td><%=form.getReport()%></td>
-				<td><%=form.getStatus()%></td>
+				<td><%=form1.getNo()%></td>
+				<td><%=form1.getName()%></td>
+				<td><%=form1.getKind()%></td>
+				<td><%=form1.getDate()%></td>
+				<td><%=form1.getReport()%></td>
+				<td><%=form1.getStatus()%></td>
 			</tr>
 			<%
 			}
@@ -92,6 +89,5 @@
 			%>
 		</table>
 	</section>
-
 </body>
 </html>

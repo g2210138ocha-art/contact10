@@ -43,7 +43,7 @@ public class ResponseServlet extends HttpServlet {
 
 			//メールアドレスと、返信用の本文を取得
 			String mail = form.getMail();
-			String content = request.getParameter("reply");
+			String content = request.getParameter("response_message");
 
 			//メール送信用のメソッドを呼び出す
 			sendMail.send("お問い合わせについて", content, mail);

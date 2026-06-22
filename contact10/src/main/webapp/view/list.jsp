@@ -8,7 +8,8 @@
 <body>
 	<%@include file="/common/header.jsp"%>
 	<div class="breadcrumb">
-		<a href="menu.jsp">メニュー</a> ｜ お問い合わせ一覧
+		<a href="<%=request.getContextPath()%>/view/menu.jsp">メニュー</a> ｜
+		お問い合わせ一覧
 	</div>
 
 	<section>

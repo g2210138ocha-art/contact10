@@ -16,7 +16,7 @@
 			<h2>パスワード変更</h2>
 		</div>
 		
-		<form action="<%=request.getContextPath() %>/view/finishPassword.html" method="post" class="login-form">
+		<form action="<%=request.getContextPath() %>/view/finishPassword.jsp" method="post" class="login-form">
 			<table class="login-table">
 				<tr>
 					<th>ID</th>

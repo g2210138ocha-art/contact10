@@ -29,12 +29,14 @@ public class DetailServlet extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 
 			//画面から送信されるNo情報を受け取ります。
-			String no = request.getParameter("no");
+			String strno = request.getParameter("no");
 
-			//⑤BookDAOクラスに定義したselectByIsbn（）メソッドを利用して書籍情報を取得します。
-			//form = objDao.selectByNo(no);
+			int no = Integer.parseInt(strno);
 
-			//⑥取得した書籍情報を「book」という名前でリクエストスコープに登録します。  
+			//FormDAOクラスに定義したselectByNo（）メソッドを利用して問い合わせ情報を取得します。
+			form = objDao.selectByNo(no);
+
+			//取得し問い合わせ情報を「form」という名前でリクエストスコープに登録します。  
 			request.setAttribute("form", form);
 
 		} catch (IllegalStateException e) {
@@ -43,7 +45,7 @@ public class DetailServlet extends HttpServlet {
 			error = "表示対象の書籍が存在しない為、詳細情報は表示できませんでした。";
 		} finally {
 			if (error.equals("")) {
-				//⑥「detail.jsp」へフォワードします。
+				//「detail.jsp」へフォワードします。
 				request.getRequestDispatcher("/detail.jsp").forward(request, response);
 
 			} else {

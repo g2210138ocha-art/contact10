@@ -282,4 +282,39 @@ public class FormDAO {
 		return formList;
 	}
 
+	public void updateStatus(int no) {
+		//変数宣言
+		Connection con = null;
+		Statement smt = null;
+
+		//SQL文発行
+		String sql = "UPDATE forminfo SET status=1 WHERE no='" + no + "'";
+
+		try {
+			//変数宣言
+			con = getConnection();
+			smt = con.createStatement();
+
+			//SQLをDBへ発行
+			smt.executeUpdate(sql);
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			//リソースの開放
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+	}
+
 }

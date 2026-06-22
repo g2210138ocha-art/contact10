@@ -25,12 +25,11 @@ public class LoginServlet extends HttpServlet {
 			//オブジェクトの生成
 			UserDAO userDaoObj = new UserDAO();
 
-			//①userid, password入力パラメータを取得する
-			String error = ""; //エラーメッセージ用変数
+			//userid, password入力パラメータを取得する
 			String inputUser = request.getParameter("userid"); //入力パラメータの取得
 			String inputPass = request.getParameter("password"); //入力パラメータの取得
 
-			//②UserDAOをインスタンス化し、関連メソッドを呼び出す
+			//UserDAOをインスタンス化し、関連メソッドを呼び出す
 			User user = userDaoObj.selectByUserid(inputUser, inputPass);
 
 			//ログイン処理
@@ -49,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 				//user用クッキーの生成
 				//クッキーオブジェクト
 				Cookie useridCookie = new Cookie("userid", inputUser);
-				//	5日間
+				//1日間
 				useridCookie.setMaxAge(60 * 60 * 24 * 1);
 				//送る
 				response.addCookie(useridCookie);

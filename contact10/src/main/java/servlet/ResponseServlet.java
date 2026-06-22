@@ -8,8 +8,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//import bean.Book;
-//import dao.BookDAO;
+import bean.Form;
+import dao.FormDAO;
+import util.SendMail;
 
 @WebServlet("/response")
 public class ResponseServlet extends HttpServlet {
@@ -17,18 +18,38 @@ public class ResponseServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//エラー処理に使用する変数の定義
-		String error = null;
+		String error = "";
+
+		//FormDAOクラスのオブジェクトを生成します。
+		FormDAO objDao = new FormDAO();
+
+		//メール用のオブジェクトを生成
+		SendMail sendMail = new SendMail();
+
+		//表示する問い合わせ情報を格納するFormオブジェクトを生成します。
+		Form form = new Form();
 
 		try {
+			//画面から送信される情報を受け取るためのエンコードを設定します。
+			request.setCharacterEncoding("UTF-8");
 
-			//オブジェクト作成
-			//BookDAO objDao = new BookDAO();
+			//画面から送信されるNo情報を受け取ります。
+			String strno = request.getParameter("no");
 
-			//selectAllメソッドを呼び出し、戻り値としてBookオブジェクトのlistを取得する
-			//ArrayList<Book> list = objDao.selectAll();
+			int no = Integer.parseInt(strno);
 
-			//取得したListをリクエストスコープに"book_list"という名前で格納する
-			//request.setAttribute("book_list", list);
+			//FormDAOクラスに定義したselectByNo（）メソッドを利用して問い合わせ情報を取得します。
+			form = objDao.selectByNo(no);
+
+			//メールアドレスと、返信用の本文を取得
+			String mail = form.getMail();
+			String content = request.getParameter("reply");
+
+			//メール送信用のメソッドを呼び出す
+			sendMail.send("お問い合わせについて", content, mail);
+
+			//対応を返信済みに更新する
+			objDao.updateStatus(no);
 
 			//list.jspにフォワード
 			request.getRequestDispatcher("/view/list.jsp").forward(request, response);

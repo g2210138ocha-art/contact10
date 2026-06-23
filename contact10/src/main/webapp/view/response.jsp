@@ -1,7 +1,9 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@page import="bean.Form,dao.FormDAO"%>
 <html>
 <head>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css">
 <title>お問い合わせ返信画面</title>
 </head>
 <body>
@@ -17,30 +19,29 @@
 		<div class="title">
 			<h2>お問い合わせ返信</h2>
 		</div>
-
+		<%
+		Form form = new Form();
+		%>
 		<table class="detail-table">
 			<tr class="green">
-				<th>6.</th>
-				<th>名前名前</th>
-				<th>受講終了後のサポートについて</th>
-				<th>2026.06.06 12:00</th>
+				<th><%=form.getNo()%></th>
+				<th><%=form.getName()%></th>
+				<th><%=form.getKind()%></th>
+				<th><%=form.getDate()%></th>
 			</tr>
 		</table>
 		<div class="form_text">
 			<p>～問い合わせ本文～</p>
 			<p>【返信内容入力欄】</p>
 		</div>
-			<form action="<%=request.getContextPath()%>/response">←ほんとはこれ-->
+		<form action="<%=request.getContextPath()%>/response">
 			<div class="response_message">
-				<textarea name="response_message" rows="10" cols="150"></textarea>
+				<textarea name="response_message" rows="10" cols="120%"></textarea>
+			</div>
+			<div style="text-align: center">
+				<input type="submit" value="送信する">
 			</div>
 		</form>
-
-		<div class="btn">
-			<a href="<%=request.getContextPath()%>/view/list.jsp" class="btn-item">送信する</a>
-			<!--			↑今はaタグ(デモ用)だけど、本当はform！(メールにデータを送るから)-->
-
-		</div>
 	</section>
 
 </body>

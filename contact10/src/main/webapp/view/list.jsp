@@ -2,7 +2,8 @@
 <%@page import="java.util.ArrayList,bean.Form,dao.FormDAO"%>
 <html>
 <head>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css">
 <title>お問い合わせ一覧</title>
 </head>
 <body>
@@ -33,19 +34,18 @@
 			Form form = new Form();
 			%>
 			<div>
-				<form
-					action="<%=request.getContextPath()%>/search?status=<%=form.getStatus()%>">
-					<input type="submit" name="noreply" value="未返信一覧">
+				<form action="<%=request.getContextPath()%>/search">
+					<input type="hidden" name="cmd" value="status"> <input
+						type="submit" name="noreply" value="未返信一覧">
 				</form>
 			</div>
 			<div>
-				<form
-					action="<%=request.getContextPath()%>/search?status=<%=form.getStatus()%>">
-					<input type="submit" name="reply" value="返信済一覧">
+				<form action="<%=request.getContextPath()%>/search">
+					<input type="hidden" name="cmd" value="status"> <input
+						type="submit" name="reply" value="返信済一覧">
 				</form>
 			</div>
 		</div>
-
 		<table class="list-table">
 			<tr class="list-table-white">
 				<th>No.</th>
@@ -61,13 +61,42 @@
 			if (list != null) {
 				for (int i = 0; i < list.size(); i++) {
 					Form form1 = (Form) list.get(i);
-					if (i % 2 == 1) {
+					String text = "";
+					String color = "";
+					switch (form1.getKind()) {
+				case 1 :
+					text = "料金・お支払い";
+					color = "lable";
+					break;
+				case 2 :
+					text = "講座、コース、教材";
+					color = "lable2";
+					break;
+				case 3 :
+					text = "学習の進め方";
+					color = "lable3";
+					break;
+				case 4 :
+					text = "受講期限";
+					break;
+				default :
+					text = "受講終了後のサポート";
+					break;
+					}
+					String status = "";
+					if (form1.getStatus() == 1) {
+				status = "未返信";
+					} else {
+				status = "済";
+					}
+					if (i % 2 != 1) {
 			%>
-			<!--ここでif文 (データある分表示)-->
-			<tr class="list-table-green">
+			<tr class="list-table-green" onclick="rowClicked(<%=form1.getNo()%>)">
 				<td><%=form1.getNo()%></td>
 				<td><%=form1.getName()%></td>
-				<td><%=form1.getKind()%></td>
+				<td><p class="<%=color%>">
+						<%=text%>
+					</p></td>
 				<td><%=form1.getDate()%></td>
 				<td><%=form1.getReport()%></td>
 				<td><%=form1.getStatus()%></td>
@@ -75,16 +104,24 @@
 			<%
 			} else {
 			%>
-			<tr class="list-table-white">
+			<tr class="list-table-white" onclick="rowClicked(<%=form1.getNo()%>)">
 				<td><%=form1.getNo()%></td>
 				<td><%=form1.getName()%></td>
-				<td><%=form1.getKind()%></td>
+				<td><p class="<%=color%>">
+						<%=text%>
+					</p></td>
 				<td><%=form1.getDate()%></td>
 				<td><%=form1.getReport()%></td>
 				<td><%=form1.getStatus()%></td>
 			</tr>
 			<%
 			}
+			%>
+			<script>
+function rowClicked(no) {
+window.location.href ='<%=request.getContextPath()%>/detail?no='+no;}
+			</script>
+			<%
 			}
 			}
 			%>

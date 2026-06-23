@@ -39,9 +39,9 @@ public class FormDAO {
 
 		//SQL文
 		String sql = "INSERT INTO forminfo (no,name,age,mail,date,sex,address,kind,report,status)"
-				+ "VALUES (null,'" + form.getName() + "', " + form.getAge() + ", '" + form.getMail() + "', 'NOW()', "
+				+ "VALUES (null,'" + form.getName() + "', " + form.getAge() + ", '" + form.getMail() + "', NOW(), "
 				+ form.getSex() + ", '" + form.getAddress() + "', " + form.getKind() + ", '"
-				+ form.getReport() + "', 0)";
+				+ form.getReport() + "', 1)";
 
 		try {
 			//データベース接続
@@ -153,6 +153,7 @@ public class FormDAO {
 				form.setSex(rs.getInt("sex"));
 				form.setAddress(rs.getString("address"));
 				form.setKind(rs.getInt("kind"));
+				form.setDate(rs.getString("date"));
 				form.setReport(rs.getString("report"));
 			}
 

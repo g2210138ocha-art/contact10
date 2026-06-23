@@ -46,7 +46,7 @@ public class DetailServlet extends HttpServlet {
 		} finally {
 			if (error.equals("")) {
 				//「detail.jsp」へフォワードします。
-				request.getRequestDispatcher("/detail.jsp").forward(request, response);
+				request.getRequestDispatcher("/view/detail.jsp").forward(request, response);
 
 			} else {
 				//リクエストスコープへの登録

@@ -19,7 +19,7 @@ public class ListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		//エラー処理に使用する変数の定義
 		String error = null;
-		
+
 		try {
 			//オブジェクト作成
 			FormDAO objDao = new FormDAO();
@@ -43,4 +43,3 @@ public class ListServlet extends HttpServlet {
 	}
 
 }
-

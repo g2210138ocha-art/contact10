@@ -36,6 +36,7 @@ public class ResponseServlet extends HttpServlet {
 			//画面から送信されるNo情報を受け取ります。
 			String strno = request.getParameter("no");
 
+			//noをint型に変換
 			int no = Integer.parseInt(strno);
 
 			//FormDAOクラスに定義したselectByNo（）メソッドを利用して問い合わせ情報を取得します。

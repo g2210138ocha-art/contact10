@@ -4,8 +4,7 @@
 
 <html>
 <head>
-<link rel="stylesheet"
-	href="<%=request.getContextPath() %>/common/style.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css">
 <title>パスワード変更画面</title>
 </head>
 

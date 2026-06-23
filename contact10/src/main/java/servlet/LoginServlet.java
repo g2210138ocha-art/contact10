@@ -34,11 +34,9 @@ public class LoginServlet extends HttpServlet {
 
 			//ログイン処理
 			if (!inputUser.equals(user.getUserid()) || !inputPass.equals(user.getPassword())) {
-
 				//useridかpasswordの入力情報が間違っていた場合
 				request.setAttribute("error", "入力データが間違っています。");
 				request.getRequestDispatcher("/view/login.jsp").forward(request, response);
-
 			} else {
 				//・User情報がある場合
 				//取得したUserオブジェクトをセッションスコープに"user"という名前で登録

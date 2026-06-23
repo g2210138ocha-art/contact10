@@ -1,7 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <html>
 <head>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css">
 <title>ホーム</title>
 </head>
 <%@include file="/common/header.jsp"%>

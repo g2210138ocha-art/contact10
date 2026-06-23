@@ -7,7 +7,7 @@
 	</head>
 	
 	<header>
-		<%@include file= "/common/header.jsp" %>
+		<%@include file="/common/headerA.jsp"%>
 	</header>
 	
 	<body>
@@ -26,7 +26,7 @@
 	</body>
 	
 	<footer>
-		<%@include file= "/common/footer.jsp" %>
+		<%@include file= "/common/footerA.jsp" %>
 	</footer>
 	
 </html>

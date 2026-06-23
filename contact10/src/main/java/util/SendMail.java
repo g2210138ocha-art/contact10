@@ -28,8 +28,8 @@ public class SendMail {
 					new javax.mail.Authenticator() {
 						protected PasswordAuthentication getPasswordAuthentication() {
 							//メールサーバにログインするメールアドレスとパスワードを設定
-							return new PasswordAuthentication("test.sender@kanda-it-school-system.com",
-									"kandaSender-2025");
+							return new PasswordAuthentication("system.project.team54@kanda-it-school-system.com",
+									"gz6jNk9HjT");
 						}
 					});
 
@@ -37,7 +37,7 @@ public class SendMail {
 
 			// 送信元メールアドレスと送信者名を指定
 			mimeMessage.setFrom(
-					new InternetAddress("test.sender@kanda-it-school-system.com", "神田英会話スクール", "iso-2022-jp"));
+					new InternetAddress("system.project.team54@kanda-it-school-system.com", "神田英会話スクール", "iso-2022-jp"));
 
 			// 送信先メールアドレスを指定（ご自分のメールアドレスに変更）
 			mimeMessage.setRecipients(Message.RecipientType.TO, address);
@@ -45,8 +45,8 @@ public class SendMail {
 			// メールのタイトルを指定
 			mimeMessage.setSubject(subject, "iso-2022-jp");
 
-			// メールのタイトルを指定
-			mimeMessage.setSubject(body, "iso-2022-jp");
+			// メールの内容を指定
+			mimeMessage.setText(body, "iso-2022-jp");
 
 			// メールの形式を指定
 			mimeMessage.setHeader("Content-Type", "text/plain; charset=iso-2022-jp");
@@ -61,7 +61,7 @@ public class SendMail {
 			System.out.println("送信に成功しました。");
 
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			System.out.println("送信に失敗しました。\n" + e);
 		}
 	}

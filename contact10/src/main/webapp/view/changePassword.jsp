@@ -4,23 +4,25 @@
 
 <html>
 <head>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css">
 <title>パスワード変更画面</title>
 </head>
 
 <header>
-	<%@include file="/common/header.jsp"%>
+	<%@include file="/common/headerA.jsp"%>
 </header>
-
 <body>
 	<div class="title">
 		<h2>パスワード変更</h2>
 	</div>
 
-	<form action="<%=request.getContextPath() %>/view/finishPassword.jsp"
+	<form action="<%=request.getContextPath()%>/view/finishPassword.jsp"
 		method="post" class="login-form">
 		<table class="login-table">
-			<%User user=new User(); %>
+			<%
+			User user = new User();
+			%>
 			<tr>
 				<th>ID</th>
 				<td>
@@ -45,8 +47,7 @@
 		</div>
 	</form>
 </body>
-
 <footer>
-	<%@include file="/common/footer.jsp"%>
+	<%@include file="/common/footerA.jsp"%>
 </footer>
 </html>

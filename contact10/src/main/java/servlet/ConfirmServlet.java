@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import bean.*;
+import bean.Form;
 
 @WebServlet("/confirm")
 public class ConfirmServlet extends HttpServlet {
@@ -53,7 +53,7 @@ public class ConfirmServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 
 			// セッションに登録
-			session.setAttribute("form_list", "form_list");
+			session.setAttribute("form_list", form_list);
 
 
 		} catch (IllegalStateException e) {

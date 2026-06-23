@@ -10,10 +10,10 @@ Form form = (Form) request.getAttribute("form");
 </head>
 
 <body>
-	<%@include file="/common/header.jsp"%>
+	<%@include file="/common/headerA.jsp"%>
 
 	<div class="breadcrumb">
-		<a href="/menu.jsp">メニュー</a> ｜ <a href="/list.jsp">お問い合わせ一覧</a> |
+		<a href="<%=request.getContextPath()%>/view/menu.jsp">メニュー</a> ｜ <a href="<%=request.getContextPath()%>/list">お問い合わせ一覧</a> |
 		お問い合わせ詳細
 	</div>
 
@@ -52,15 +52,37 @@ Form form = (Form) request.getAttribute("form");
 		</table>
 
 		<div class="contact-text">
-			<tr>
-				<td><%=form.getReport()%></td>
-			</tr>
+			<%=form.getReport()%>
 		</div>
+
+		<!-- if文で返信済みかどうか振り分け -->
+		<!-- if文ここから (返信済み(1じゃない)なら以下の処理)-->
+		<%
+		if (form.getStatus() == 2) {
+		%>
+
+		<div class="response-text">
+			<p>【返信内容】</p>
+			<p><!-- 返信内容の変数を入れる -->
+			</p>
+		</div>
+		<!--返信済みのものは「お問い合わせ一覧へ戻る」のボタンのみ表示-->
+		<div class="btn">
+			<a href="<%=request.getContextPath()%>/list" class="btn-item">お問い合わせ一覧へ戻る</a>
+		</div>
+		<%
+		} else {
+		%>
 
 		<div class="btn">
 			<a href="<%=request.getContextPath()%>/list" class="btn-item">お問い合わせ一覧へ戻る</a>
-			<a href="<%=request.getContextPath()%>/view/response.jsp" class="btn-item">返信する</a>
+			<a
+				href="<%=request.getContextPath()%>/view/response.jsp?no=<%=form.getNo()%>"
+				class="btn-item">返信する</a>
 		</div>
+		<%
+		}
+		%>
 
 	</section>
 

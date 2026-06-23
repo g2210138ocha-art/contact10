@@ -34,7 +34,7 @@ if (cmd == null) {
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css">
 <title>お問い合わせシステムログイン</title>
 </head>
-<%@include file="/common/header.jsp"%>
+<%@include file="/common/headerA.jsp"%>
 <body>
 	<main>
 		<div class="title">
@@ -52,11 +52,11 @@ if (cmd == null) {
 			<table class="login-table">
 				<tr>
 					<th>ログインID</th>
-					<td><input type="text" name="userid"></td>
+					<td><input type="text" name="userid" value=<%=user%>></td>
 				</tr>
 				<tr>
 					<th>パスワード</th>
-					<td><input type="password" name="password"></td>
+					<td><input type="password" name="password" value=<%=pass%>></td>
 				</tr>
 				<tr>
 					<%if (cmd.equals("logout")) {%>
@@ -69,6 +69,6 @@ if (cmd == null) {
 			</div>
 		</form>
 	</main>
-
+<%@include file="/common/footerA.jsp"%>
 </body>
 </html>

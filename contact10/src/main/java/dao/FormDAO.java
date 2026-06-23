@@ -155,6 +155,7 @@ public class FormDAO {
 				form.setKind(rs.getInt("kind"));
 				form.setDate(rs.getString("date"));
 				form.setReport(rs.getString("report"));
+				form.setStatus(rs.getInt("status"));
 			}
 
 		} catch (Exception e) {
@@ -283,13 +284,15 @@ public class FormDAO {
 		return formList;
 	}
 
-	public void updateStatus(int no) {
+	public void updateStatus(Form form) {
 		//変数宣言
 		Connection con = null;
 		Statement smt = null;
 
 		//SQL文発行
-		String sql = "UPDATE forminfo SET status=1 WHERE no='" + no + "'";
+		String sql = "UPDATE forminfo SET status=2, responsed_by='" + form.getResponsed_by() + "', updated_at='"
+				+ form.getUpdated_at() + "',response='" + form.getResponse() + "' WHERE no="
+				+ form.getNo();
 
 		try {
 			//変数宣言

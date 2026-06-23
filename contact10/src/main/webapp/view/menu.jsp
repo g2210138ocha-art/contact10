@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css">
 <title>ホーム</title>
 </head>
-<%@include file="/common/header.jsp"%>
+<%@include file="/common/headerA.jsp"%>
 <body>
 	<main>
 		<div class="title">
@@ -24,4 +24,5 @@
 		</div>
 	</main>
 </body>
+<%@include file="/common/footerA.jsp"%>
 </html>

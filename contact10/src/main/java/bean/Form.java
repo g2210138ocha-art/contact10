@@ -14,13 +14,14 @@ public class Form {
 	private int status; //状態(0:未返信、1:返信済み)を格納する変数
 	private String updated_at; //返信した日時
 	private String responsed_by; //返信者のユーザーidを格納する変数
+	private String response; //返信内容
 
 	//コンストラクタ定義
 	public Form() {
 		this.no = 0;
 		this.name = null;
 		this.mail = null;
-		this.age=0;
+		this.age = 0;
 		this.date = null;
 		this.sex = 0;
 		this.address = null;
@@ -29,6 +30,7 @@ public class Form {
 		this.status = 0;
 		this.updated_at = null;
 		this.responsed_by = null;
+		this.response = null;
 	}
 
 	//各フィールド変数のGetメソッド定義
@@ -43,7 +45,7 @@ public class Form {
 	public String getMail() {
 		return mail;
 	}
-	
+
 	public int getAge() {
 		return age;
 	}
@@ -80,6 +82,10 @@ public class Form {
 		return responsed_by;
 	}
 
+	public String getResponse() {
+		return response;
+	}
+
 	//各フィールド変数のSetメソッド定義
 	public void setNo(int no) {
 		this.no = no;
@@ -92,9 +98,9 @@ public class Form {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	
+
 	public void setAge(int age) {
-		this.age=age;
+		this.age = age;
 	}
 
 	public void setDate(String date) {
@@ -127,6 +133,10 @@ public class Form {
 
 	public void setResponsed_by(String responsed_by) {
 		this.responsed_by = responsed_by;
+	}
+
+	public void setResponse(String response) {
+		this.response = response;
 	}
 
 }

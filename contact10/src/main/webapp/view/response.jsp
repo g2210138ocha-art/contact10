@@ -43,18 +43,61 @@ Form form = objDao.selectByNo(no);
 			text = "受講終了後のサポートについて";
 			break;
 		}
+		//性別表示
+		String sex = "未選択";
+		if (form.getSex() == 1) {
+			sex = "男性";
+		} else if (form.getSex() == 2) {
+			sex = "女性";
+		} else if (form.getSex() == 3) {
+			sex = "その他";
+		}
+		//年齢表示
+		String age = "未入力";
+		if (!form.getAge().equals(null) && !form.getAge().isEmpty()) {
+			age = form.getAge() + "歳";
+		}
+		//住所表示
+		String address = "未入力";
+		if (!form.getAddress().equals(null) && !form.getAddress().isEmpty()) {
+			address = form.getAddress();
+		}
 		%>
 
-		<table class="detail-table">
-			<tr class="green">
-				<th><%=form.getNo()%></th>
-				<th><%=form.getName()%></th>
-				<th><%=text%></th>
-				<th><%=form.getDate()%></th>
-			</tr>
-		</table>
-		<div class="form_text">
+		<div class="forminfo">
+			<div class="forminfo_area">
+				<h4>【お問い合わせ者情報】</h4>
+				<div class="forminfo_inner">
+					<p>
+						<span>No</span><%=form.getNo()%></p>
+					<p>
+						<span>名前</span><%=form.getName()%></p>
+					<p>
+						<span>年齢</span><%=age%>
+					</p>
+					<p>
+						<span>性別</span><%=sex%></p>
+					<p>
+						<span>問い合わせ日時</span><%=form.getDate()%></p>
+				</div>
+				<div class="forminfo_inner">
+					<p>
+						<span>メールアドレス</span><%=form.getMail()%></p>
+					<p>
+						<span>問い合わせ種類</span><%=text%></p>
+				</div>
+				<div class="forminfo_inner">
+					<p>
+						<span>住所</span><%=address%></p>
+				</div>
+			</div>
+		</div>
+		<div class="contact-text">
+			<h4>【お問い合わせ内容】</h4>
 			<p><%=form.getReport()%></p>
+		</div>
+
+		<div class="form_text">
 			<p>【返信内容入力欄】</p>
 		</div>
 		<form action="<%=request.getContextPath()%>/response">

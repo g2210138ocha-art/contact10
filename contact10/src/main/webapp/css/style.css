@@ -235,8 +235,9 @@ h4 {
 
 .contact-text,
 .response-text {
+	width: 80%;
 	text-align: center;
-	margin-bottom: 8rem;
+	margin: 0 auto 8rem ;
 }
 
 

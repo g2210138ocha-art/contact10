@@ -13,8 +13,8 @@ Form form = (Form) request.getAttribute("form");
 	<%@include file="/common/headerA.jsp"%>
 
 	<div class="breadcrumb">
-		<a href="<%=request.getContextPath()%>/view/menu.jsp">メニュー</a> ｜ <a href="<%=request.getContextPath()%>/list">お問い合わせ一覧</a> |
-		お問い合わせ詳細
+		<a href="<%=request.getContextPath()%>/view/menu.jsp">メニュー</a> ｜ <a
+			href="<%=request.getContextPath()%>/list">お問い合わせ一覧</a> | お問い合わせ詳細
 	</div>
 
 	<section>
@@ -38,39 +38,57 @@ Form form = (Form) request.getAttribute("form");
 			text = "受講期限について";
 			break;
 		case 5:
-			text="受講終了後のサポートについて";
+			text = "受講終了後のサポートについて";
 			break;
 		default:
 			text = "未選択";
 			break;
 		}
 		//性別表示
-		String sex = "その他";
-		if(form.getSex() == 1){
+		String sex = "未選択";
+		if (form.getSex() == 1) {
 			sex = "男性";
-		}else{
+		} else if (form.getSex() == 2) {
 			sex = "女性";
-		}		%>
-
-		<% 
-		
+		} else if (form.getSex() == 3) {
+			sex = "その他";
+		}
+		//年齢表示
+		String age = "未入力";
+		if (!form.getAge().equals(null) && !form.getAge().isEmpty()) {
+			age = form.getAge() + "歳";
+		}
+		//住所表示
+		String address = "未入力";
+		if (!form.getAddress().equals(null) && !form.getAddress().isEmpty()) {
+			address = form.getAddress();
+		}
 		%>
 		<div class="forminfo">
 			<div class="forminfo_area">
 				<h4>【お問い合わせ者情報】</h4>
 				<div class="forminfo_inner">
-					<p><span>No</span><%=form.getNo()%></p>
-					<p><span>名前</span><%=form.getName()%></p>
-					<p><span>年齢</span><%=form.getAge()%>歳</p>
-					<p><span>性別</span><%=sex%></p>
-					<p><span>問い合わせ日時</span><%=form.getDate()%></p>
+					<p>
+						<span>No</span><%=form.getNo()%></p>
+					<p>
+						<span>名前</span><%=form.getName()%></p>
+					<p>
+						<span>年齢</span><%=age%>
+					</p>
+					<p>
+						<span>性別</span><%=sex%></p>
+					<p>
+						<span>問い合わせ日時</span><%=form.getDate()%></p>
 				</div>
 				<div class="forminfo_inner">
-					<p><span>メールアドレス</span><%=form.getMail()%></p>
-					<p><span>問い合わせ種類</span><%=text%></p>
+					<p>
+						<span>メールアドレス</span><%=form.getMail()%></p>
+					<p>
+						<span>問い合わせ種類</span><%=text%></p>
 				</div>
 				<div class="forminfo_inner">
-					<p><span>住所</span><%=form.getAddress()%></p>
+					<p>
+						<span>住所</span><%=address%></p>
 				</div>
 			</div>
 		</div>

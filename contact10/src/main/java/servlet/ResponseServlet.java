@@ -52,7 +52,7 @@ public class ResponseServlet extends HttpServlet {
 			String content = request.getParameter("response_message");
 
 			//メール送信用のメソッドを呼び出す
-			sendMail.send("お問い合わせについて", content, mail);
+			sendMail.send("お問い合わせについて(神田英会話スクール)", content, mail);
 
 			//返信の情報を格納するオブジェクトの生成
 			Form form1 = new Form();

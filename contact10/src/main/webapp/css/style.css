@@ -1,14 +1,13 @@
 @charset "UTF-8";
 
-body {
+body{
 	width: 100%;
 }
 
-table {
+table{
 	border-spacing: 0;
 }
-
-span {
+span{
 	background-color: red;
 	color: white;
 	font-size: 9px;
@@ -17,26 +16,22 @@ span {
 	display: inline-block;
 	margin-bottom: 2px;
 }
-
-.title {
+.title{
 	width: 50%;
 	margin: 0 auto;
 	text-align: center;
 	border-bottom: solid #881aff 5px;
 	padding-top: 2rem;
 }
-
-.submit {
+.submit{
 	text-align: center;
 	margin-top: 2rem;
 }
-
-.breadcrumb {
+.breadcrumb{
 	margin: 4rem 0 1.5rem;
 	padding-left: 10rem;
 }
-
-section {
+section{
 	width: 75%;
 	height: auto;
 	margin: 0 auto;
@@ -47,45 +42,54 @@ section {
 
 
 /***** form *****/
-.form_area {
+.form_area{
 	width: 100%;
 	margin-top: 2rem;
 }
-
-.form_table {
+.form_table{
 	margin: 0 auto;
 	border-spacing: 20px;
 }
-
-.form_textarea {
+.form_textarea{
 	text-align: center;
 }
-
-.form_textarea p {
+.form_textarea p{
 	font-weight: 600;
+}
+.form_error_message{
+	text-align: center;
+	color: red;
+}
+.formtel-area{
+	text-align: center;
+}
+.formtel{
+	display: inline-block;
+	text-align: center;
+	padding: 1em 4rem;
+    margin-top: 2em;
+    border: double 5px #4ec4d3;
+	
 }
 
 /***** login *****/
-.login-form {
+.login-form{
 	width: 100%;
 	margin-top: 3rem;
 }
-
-.login-table {
+.login-table{
 	margin: 0 auto;
 }
-
-.login-table th {
+.login-table th{
 	background-color: #e2c6ff;
 	padding: 0 25px;
 }
-
-.login-table td {
+.login-table td{
 	padding-left: 1.5rem;
 }
 
 /***** menu *****/
-.menu {
+.menu{
 	display: grid;
 	justify-content: center;
 	text-align: center;
@@ -93,204 +97,164 @@ section {
 }
 
 /*****list******/
-.list {
+.list{
 	width: auto;
 	padding: 1.5rem 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	gap: 20px;
+	gap: 30px;
 }
-
-.search {
-	margin-right: 2rem;
+.list input[type="text"]{
+	height: 25px;
 }
-
-.list-table {
+.list-table{
 	width: 96%;
 	margin: 0 auto;
 	padding-bottom: 2rem;
 }
-
-.list-table-white-th {
+.list-table-white-th{
 	background-color: #ffffff;
 }
-
-.list-table-white-th th {
+.list-table-white-th th{
 	padding: 12px 20px;
 }
-
-.list-table-white {
+.list-table-white{
 	background-color: #ffffff;
 }
-
-.list-table-green {
+.list-table-green{
 	background-color: #e6ffe6;
 }
 
 .list-table-white:hover,
-.list-table-green:hover {
-	opacity: 0.6;
-	filter: brightness(110%);
-	/* ホバーしたら浮き出る */
+.list-table-green:hover{
+	opacity: 0.6; filter: brightness(110%);  /* ホバーしたら浮き出る */
 }
-
-.list-table th:nth-child(5),
+.list-table th:nth-child(5), 
 .list-table td:nth-child(5) {
-	max-width: 300px;
-	/* 最大幅を指定（この幅を超えると省略される） */
-	white-space: nowrap;
-	/* 文字を改行せずに1行にする */
-	overflow: hidden;
-	/* はみ出た部分を隠す */
-	text-overflow: ellipsis;
-	/* はみ出た部分を「...」で省略する */
+  max-width: 300px;         /* 最大幅を指定（この幅を超えると省略される） */
+  white-space: nowrap;      /* 文字を改行せずに1行にする */
+  overflow: hidden;         /* はみ出た部分を隠す */
+  text-overflow: ellipsis;  /* はみ出た部分を「...」で省略する */
 }
-
 
 .list-table-white th,
 .list-table-white td,
-.list-table-green td {
+.list-table-green td{
 	padding: 17px 20px;
 }
-
-.list-table td {
+.list-table td{
 	text-align: center;
 	width: auto;
 }
-
-.list-seach {
+.list-seach{
 	display: flex;
 	justify-content: center;
-	gap: 20px;
+	gap: 10px;
 }
-
 /*--分岐させてそれぞれ使うやつ--*/
-.lable1,
-.lable2,
-.lable3,
-.lable4,
-.lable5 {
+.lable1,.lable2,.lable3,.lable4,.lable5{
 	font-size: 12px;
 	border-radius: 30px;
 	padding: 3px 1px;
 }
-
-.lable1 {
+.lable1{
 	background-color: #83ccd2;
 }
-
-.lable2 {
+.lable2{
 	background-color: #FFDAA2;
 }
-
-.lable3 {
+.lable3{
 	background-color: #F7ADC3;
 }
-
-.lable4 {
+.lable4{
 	background-color: #98ae66;
 }
-
-.lable5 {
+.lable5{
 	background-color: #AFB4DB;
 }
 
-.response_finished {
+.response_finished{
 	background-color: red;
 	border-radius: 30px;
 	color: white;
 }
-
 /*-------------------------------*/
 
 
 /***** detail ******/
-h4 {
+h4{
 	text-align: center;
 }
-
-.forminfo {
+.forminfo{
 	width: 94%;
 	margin: 4rem auto;
 	border: solid 6px #ccc;
 	border-radius: 10px;
 }
-
-.forminfo_area {
+.forminfo_area{
 	padding: 1rem;
 	background-color: #fff;
 }
-
-.forminfo_inner {
+.forminfo_inner{
 	display: flex;
 	justify-content: space-around;
 }
-
-.forminfo_inner span {
+.forminfo_inner span{
 	font-size: 16px;
 	background-color: #e6ffe6;
 	color: #000;
 }
 
 .contact-text,
-.response-text {
+.response-text{
 	width: 80%;
+	margin: 0 auto 8rem;
 	text-align: center;
-	margin: 0 auto 8rem ;
 }
 
 
-.btn {
+.btn{
 	padding-bottom: 4rem;
 	display: flex;
 	justify-content: space-around;
 }
-
-.btn-item {
+.btn-item{
 	padding: 1rem 4rem;
 	background-color: #e6ffe6;
 	border: 1px solid #000;
 	border-radius: 30px
+	
+	
 }
 
 /***** error ******/
-.error-message {
+.error-message{
 	text-align: center;
 	padding-top: 2rem;
 }
 
-
-/***** form ******/
-.form_error_message {
-	text-align: center;
-	color: red;
-}
 
 /***** formFinish ******/
-.form-message {
+.form-message{
 	text-align: center;
 	padding-top: 2rem;
 }
-
-.form-message p {
+.form-message p{
 	padding-bottom: 1rem;
 }
-
-.form-message p:last-child {
+.form-message p:last-child{
 	font-weight: 700;
 }
 
 /***** response ******/
-.form_text {
+.form_text{
 	text-align: center;
 }
-
-.form_text p:last-child {
+.form_text p:last-child{
 	padding-top: 2rem;
 }
-
-.response_message {
+.response_message{
 	text-align: center;
 	margin-bottom: 2rem;
 }

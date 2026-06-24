@@ -66,7 +66,7 @@ public class ConfirmServlet extends HttpServlet {
 			session.setAttribute("form_list", form_list);
 
 		} catch (IllegalStateException e) {
-			error = "DB接続エラーの為、書籍登録処理は行えませんでした。";
+			error = "DB接続エラーの為、問い合わせ内容の確認は行えませんでした。";
 		} catch (Exception e) {
 			error = "予期せぬエラー";
 			e.printStackTrace();

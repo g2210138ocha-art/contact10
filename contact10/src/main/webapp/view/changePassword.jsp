@@ -2,6 +2,7 @@
 <%@page import="bean.User,dao.UserDAO"%>
 
 <%
+String error = (String) request.getAttribute("error");
 User user = (User) session.getAttribute("user");
 %>
 <html>
@@ -21,6 +22,13 @@ User user = (User) session.getAttribute("user");
 
 	<form action="<%=request.getContextPath()%>/changePassword"
 		method="post" class="login-form">
+		<%
+		if (error != null) {
+		%>
+		<p style="text-align: center;"><%=error%></p>
+		<%
+}
+%>
 		<table class="login-table">
 			<tr>
 				<th>ID</th>

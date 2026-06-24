@@ -73,17 +73,20 @@ public class ChangePasswordServlet extends HttpServlet {
 			session.setAttribute("user", user);
 
 		} catch (IllegalStateException e) {
-			error = "DB接続エラーの為、ログインは出来ません。";
+			error = "DB接続エラーの為、パスワード変更は出来ません。";
 			errorCmd = "logout";
 		} catch (Exception e) {
 			error = "予期せぬエラー";
 		} finally {
 			if (error.equals("")) { //正常処理の遷移
 				request.getRequestDispatcher("/view/finishPassword.jsp").forward(request, response);
-			} else { //エラー時の遷移先分岐
+			} else {
 				request.setAttribute("error", error);
-				request.setAttribute("errorCmd", errorCmd);
-				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+				if (errorCmd.equals("menu")) {//エラー時の遷移先分岐
+					request.getRequestDispatcher("/view/changePassword.jsp").forward(request, response);
+				} else {
+					request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+				}
 			}
 		}
 	}

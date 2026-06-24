@@ -40,9 +40,7 @@ public class DetailServlet extends HttpServlet {
 			request.setAttribute("form", form);
 
 		} catch (IllegalStateException e) {
-			error = "DB接続エラーのため書籍登録処理は行えませんでした。";
-		} catch (NumberFormatException e) {
-			error = "表示対象の書籍が存在しない為、詳細情報は表示できませんでした。";
+			error = "DB接続エラーのため詳細表示を行えませんでした。";
 		} finally {
 			if (error.equals("")) {
 				//「detail.jsp」へフォワードします。

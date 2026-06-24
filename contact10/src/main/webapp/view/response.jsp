@@ -17,8 +17,7 @@ Form form = objDao.selectByNo(no);
 <body>
 	<div class="breadcrumb">
 		<a href="<%=request.getContextPath()%>/view/menu.jsp">メニュー</a> ｜ <a
-			href="<%=request.getContextPath()%>/view/list.jsp">お問い合わせ一覧</a> |
-		お問い合わせ詳細
+			href="<%=request.getContextPath()%>/list">お問い合わせ一覧</a> | お問い合わせ詳細
 	</div>
 
 	<section>
@@ -55,7 +54,7 @@ Form form = objDao.selectByNo(no);
 			</tr>
 		</table>
 		<div class="form_text">
-			<p>～問い合わせ本文～</p>
+			<p><%=form.getReport()%></p>
 			<p>【返信内容入力欄】</p>
 		</div>
 		<form action="<%=request.getContextPath()%>/response">

@@ -5,7 +5,7 @@ public class Form {
 	private int no; //問い合わせ番号を格納する変数
 	private String name; //名前を格納する変数
 	private String mail; //メールアドレスを格納する変数
-	private int age; //年齢を格納する変数
+	private String age; //年齢を格納する変数
 	private String date; //日付を格納する変数
 	private int sex; //性別を格納する変数
 	private String address; //住所を格納する変数
@@ -21,7 +21,7 @@ public class Form {
 		this.no = 0;
 		this.name = null;
 		this.mail = null;
-		this.age = 0;
+		this.age = null;
 		this.date = null;
 		this.sex = 0;
 		this.address = null;
@@ -46,7 +46,7 @@ public class Form {
 		return mail;
 	}
 
-	public int getAge() {
+	public String getAge() {
 		return age;
 	}
 
@@ -99,7 +99,7 @@ public class Form {
 		this.mail = mail;
 	}
 
-	public void setAge(int age) {
+	public void setAge(String age) {
 		this.age = age;
 	}
 

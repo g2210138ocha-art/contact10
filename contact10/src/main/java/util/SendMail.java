@@ -37,7 +37,8 @@ public class SendMail {
 
 			// 送信元メールアドレスと送信者名を指定
 			mimeMessage.setFrom(
-					new InternetAddress("system.project.team54@kanda-it-school-system.com", "神田英会話スクール", "iso-2022-jp"));
+					new InternetAddress("system.project.team54@kanda-it-school-system.com", "神田英会話スクール",
+							"iso-2022-jp"));
 
 			// 送信先メールアドレスを指定（ご自分のメールアドレスに変更）
 			mimeMessage.setRecipients(Message.RecipientType.TO, address);
@@ -61,7 +62,6 @@ public class SendMail {
 			System.out.println("送信に成功しました。");
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.out.println("送信に失敗しました。\n" + e);
 		}
 	}

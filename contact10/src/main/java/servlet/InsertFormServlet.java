@@ -100,7 +100,7 @@ public class InsertFormServlet extends HttpServlet {
 			sendMail.send("お問い合わせありがとうございます。(神田英会話スクール)", content, mail);
 
 		} catch (IllegalStateException e) {
-			error = "DB接続エラーの為、書籍登録処理は行えませんでした。";
+			error = "DB接続エラーの為、問い合わせを送信できませんでした。";
 		} catch (Exception e) {
 			error = "予期せぬエラー";
 		} finally {

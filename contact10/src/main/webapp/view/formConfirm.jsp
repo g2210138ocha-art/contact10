@@ -31,31 +31,36 @@ ArrayList<Form> form_list = (ArrayList<Form>) session.getAttribute("form_list");
 					//性別を数字で識別し出力
 					String strsex = null;
 					if (form_list.get(i).getSex() == 1) {
-						strsex = "男性";
+				strsex = "男性";
 					} else if (form_list.get(0).getSex() == 2) {
-						strsex = "女性";
+				strsex = "女性";
+					} else if (form_list.get(0).getSex() == 3) {
+				strsex = "その他";
 					} else {
-						strsex = "その他";
+				strsex = "未選択";
 					}
 
 					//問い合わせ項目を数字で識別し出力する
 					String text = "";
 					switch (form_list.get(i).getKind()) {
 					case 1:
-						text = "料金・お支払いについて";
-						break;
+				text = "料金・お支払いについて";
+				break;
 					case 2:
-						text = "講座、コース、教材について";
-						break;
+				text = "講座、コース、教材について";
+				break;
 					case 3:
-						text = "学習の進め方について";
-						break;
+				text = "学習の進め方について";
+				break;
 					case 4:
-						text = "受講期限について";
-						break;
+				text = "受講期限について";
+				break;
+					case 5:
+				text = "受講終了後のサポートについて";
+				break;
 					default:
-						text = "受講終了後のサポートについて";
-						break;
+				text = "未選択";
+				break;
 					}
 			%>
 			<tr>
@@ -92,8 +97,11 @@ ArrayList<Form> form_list = (ArrayList<Form>) session.getAttribute("form_list");
 		}
 		}
 		%>
+
+
 		<div class="submit">
-			<input type="submit" value="送信">
+			<a href="<%=request.getContextPath()%>/view/form.jsp">戻る</a> <input
+				type="submit" value="送信" style="margin-left: 130px">
 		</div>
 	</form>
 </body>

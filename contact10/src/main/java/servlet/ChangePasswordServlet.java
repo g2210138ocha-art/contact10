@@ -79,7 +79,7 @@ public class ChangePasswordServlet extends HttpServlet {
 			error = "予期せぬエラー";
 		} finally {
 			if (error.equals("")) { //正常処理の遷移
-				request.getRequestDispatcher("/view/menu.jsp").forward(request, response);
+				request.getRequestDispatcher("/view/finishPassword.jsp").forward(request, response);
 			} else { //エラー時の遷移先分岐
 				request.setAttribute("error", error);
 				request.setAttribute("errorCmd", errorCmd);

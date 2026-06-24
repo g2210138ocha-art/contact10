@@ -20,7 +20,7 @@
 		</div>
 
 		<div class="error-message">
-			<a href="login.html">［ログイン画面に戻る］</a>
+			<a href="<%=request.getContextPath()%>/view/login.jsp">［ログイン画面に戻る］</a>
 		</div>
 
 	</body>

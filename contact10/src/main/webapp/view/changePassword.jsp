@@ -1,7 +1,9 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page import="bean.User,dao.UserDAO"%>
 
-
+<%
+User user = (User) session.getAttribute("user");
+%>
 <html>
 <head>
 <link rel="stylesheet"
@@ -17,17 +19,12 @@
 		<h2>パスワード変更</h2>
 	</div>
 
-	<form action="<%=request.getContextPath()%>/view/finishPassword.jsp"
+	<form action="<%=request.getContextPath()%>/changePassword"
 		method="post" class="login-form">
 		<table class="login-table">
-			<%
-			User user = new User();
-			%>
 			<tr>
 				<th>ID</th>
-				<td>
-					<%user.getUserid();%>
-				</td>
+				<td><%=user.getUserid()%></td>
 			</tr>
 			<tr>
 				<th>旧パスワード</th>

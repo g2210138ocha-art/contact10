@@ -68,7 +68,7 @@ public class ResponseServlet extends HttpServlet {
 			//対応を返信済みに更新する
 			objDao.updateStatus(form1);
 
-			//list.jspにフォワード
+			//ListServletにフォワード
 			request.getRequestDispatcher("/list").forward(request, response);
 
 		} catch (IllegalStateException e) {

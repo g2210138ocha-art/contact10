@@ -17,49 +17,52 @@
 		<div class="title">
 			<h2>お問い合わせ一覧</h2>
 		</div>
-		
-		<div class="list">
-			<div class="search">
-				<form action="<%=request.getContextPath()%>/search"class="list-seach">
-					<p><input type="text" name="no" placeholder="No.を入力"></p>
-					<p><input type="submit" name="search" value="検索"></p>
-				</form>
-			</div>
-			<div class="search">
-				<form action="<%=request.getContextPath()%>/search" class="list-seach">
-					<p><input type="text" name="string" placeholder="キーワードを入力"></p>
-					<p><input type="submit" name="search" value="検索"></p>
-				</form>
-			</div>
-			<div class="search">
-				<form action="<%=request.getContextPath()%>/search">
-					<select name="kind" style="padding: 4px;">
-						<option value="" disabled selected>問い合わせ種類で検索</option>
-						<option value="1">①料金・お支払いについて</option>
-						<option value="2">②講座、コース、教材について</option>
-						<option value="3">③学習の進め方について</option>
-						<option value="4">④受講期限について</option>
-						<option value="5">⑤受講終了後のサポートについて</option>
-					</select>
-					<input type="submit" value="検索">
-				</form>
-			</div>
 
-			<%
-			Form form = new Form();
-			%>
-			<div>
-				<form action="<%=request.getContextPath()%>/search">
-					<input type="hidden" name="cmd" value="status"> <input
-						type="submit" name="noreply" value="未返信一覧">
-				</form>
-			</div>
-			<div>
-				<form action="<%=request.getContextPath()%>/search">
-					<input type="hidden" name="cmd" value="status"> <input
-						type="submit" name="reply" value="返信済一覧">
-				</form>
-			</div>
+		<div class="list">
+			<form action="<%=request.getContextPath()%>/search"
+				class="list-seach">
+				<p>
+					<input type="number" name="no" placeholder="No.を入力">
+				</p>
+				<p>
+					<input type="hidden" name="cmd" value="no"><input
+						type="submit" name="search" value="検索">
+				</p>
+			</form>
+			<form action="<%=request.getContextPath()%>/search"
+				class="list-seach">
+				<p>
+					<input type="text" name="string" placeholder="キーワードを入力">
+				</p>
+				<p>
+					<input type="hidden" name="cmd" value="name"><input
+						type="submit" name="search" value="検索">
+				</p>
+			</form>
+			<form action="<%=request.getContextPath()%>/search">
+				<select name="kind" style="padding: 4px;">
+					<option value="" disabled selected>問い合わせ種類で検索</option>
+					<option value="1">①料金・お支払いについて</option>
+					<option value="2">②講座、コース、教材について</option>
+					<option value="3">③学習の進め方について</option>
+					<option value="4">④受講期限について</option>
+					<option value="5">⑤受講終了後のサポートについて</option>
+				</select> <input type="hidden" name="cmd" value="kind"><input
+					type="submit" value="検索">
+			</form>
+			<form action="<%=request.getContextPath()%>/search">
+				<input type="hidden" name="status" value="1"> <input
+					type="hidden" name="cmd" value="status"><input
+					type="submit" value="未返信一覧">
+			</form>
+			<form action="<%=request.getContextPath()%>/search">
+				<input type="hidden" name="status" value="2"><input
+					type="hidden" name="cmd" value="status"> <input
+					type="submit" value="返信済一覧">
+			</form>
+			<form action="<%=request.getContextPath()%>/list">
+				<input type="submit" name="alllist" value="全件表示">
+			</form>
 		</div>
 		<table class="list-table">
 			<tr class="list-table-white-th">
@@ -75,11 +78,11 @@
 			ArrayList<Form> list = (ArrayList<Form>) request.getAttribute("form_list");
 			if (list != null) {
 				for (int i = 0; i < list.size(); i++) {
-					Form form1 = (Form) list.get(i);
+					Form form = (Form) list.get(i);
 					String text = "";
 					String lable = "";
 					String color = "";
-					switch (form1.getKind()) {
+					switch (form.getKind()) {
 				case 1 :
 					text = "料金・お支払い";
 					lable = "lable1";
@@ -96,13 +99,16 @@
 					text = "受講期限";
 					lable = "lable4";
 					break;
-				default :
+				case 5 :
 					text = "受講終了後のサポート";
 					lable = "lable5";
 					break;
+				default :
+					text = "";
+					lable = "";
 					}
 					String status = "";
-					if (form1.getStatus() == 1) {
+					if (form.getStatus() == 1) {
 				status = "未返信";
 				color = "response_finished";
 					} else {
@@ -110,31 +116,31 @@
 					}
 					if (i % 2 != 1) {
 			%>
-			<tr class="list-table-green" onclick="rowClicked(<%=form1.getNo()%>)">
-				<td><%=form1.getNo()%></td>
-				<td><%=form1.getName()%></td>
+			<tr class="list-table-green" onclick="rowClicked(<%=form.getNo()%>)">
+				<td><%=form.getNo()%></td>
+				<td><%=form.getName()%></td>
 				<td><p class="<%=lable%>">
 						<%=text%>
 					</p></td>
-				<td><%=form1.getDate()%></td>
-				<td><%=form1.getReport()%></td>
+				<td><%=form.getDate()%></td>
+				<td><%=form.getReport()%></td>
 				<td><p class="<%=color%>">
-						<%= status %>
+						<%=status%>
 					</p></td>
 			</tr>
 			<%
 			} else {
 			%>
-			<tr class="list-table-white" onclick="rowClicked(<%=form1.getNo()%>)">
-				<td><%=form1.getNo()%></td>
-				<td><%=form1.getName()%></td>
+			<tr class="list-table-white" onclick="rowClicked(<%=form.getNo()%>)">
+				<td><%=form.getNo()%></td>
+				<td><%=form.getName()%></td>
 				<td><p class="<%=lable%>">
 						<%=text%>
 					</p></td>
-				<td><%=form1.getDate()%></td>
-				<td><%=form1.getReport()%></td>
+				<td><%=form.getDate()%></td>
+				<td><%=form.getReport()%></td>
 				<td><p class="<%=color%>">
-						<%= status %>
+						<%=status%>
 					</p></td>
 			</tr>
 			<%

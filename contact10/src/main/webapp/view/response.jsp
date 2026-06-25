@@ -5,7 +5,14 @@ String strno = request.getParameter("no");
 int no = Integer.parseInt(strno);
 //オブジェクト宣言
 FormDAO objDao = new FormDAO();
-Form form = objDao.selectByNo(no);
+Form form = new Form();
+try {
+	form = objDao.selectByNo(no);
+} catch (IllegalStateException e) {
+	request.setAttribute("error", "DB接続エラーのため、返信画面を表示できませんでした。");
+	request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+	return;
+}
 %>
 <html>
 <head>

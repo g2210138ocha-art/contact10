@@ -39,7 +39,7 @@ String error = (String)request.getAttribute("error");
 				</tr>
 				<tr>
 					<th>年齢：</th>
-					<td><input type="number" name="age"></td>
+					<td><input type="number" min="0" max="120" step="1" name="age"></td>
 				</tr>
 				<tr>
 					<th>性別：</th>

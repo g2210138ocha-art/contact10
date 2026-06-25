@@ -20,6 +20,7 @@
 			</p>
 			<p>お問い合わせありがとうございました。</p>
 			<p>神田英会話スクール</p>
+			<p><a href="<%=request.getContextPath()%>/view/form.jsp">お問い合わせフォームに戻る</a></p>
 		</div>
 	</main>
 </body>

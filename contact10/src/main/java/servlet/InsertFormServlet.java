@@ -35,12 +35,17 @@ public class InsertFormServlet extends HttpServlet {
 		SendMail sendMail = new SendMail();
 
 		try {
-
-			//④セッションから入力情報を取得
+			//セッションから入力情報を取得
 			HttpSession session = request.getSession();
 			ArrayList<Form> form_list = (ArrayList<Form>) session.getAttribute("form_list");
 
-			//セッションから取得した情報をformに格納
+			//セッション切れかどうか判定
+			if (form_list == null) {
+				error = "セッション切れの為、問い合わせ送信は行えません。";
+				return;
+			}
+
+			//セッションから取得した情報をform_listに格納
 			form.setName(form_list.get(0).getName());
 			form.setAge(form_list.get(0).getAge());
 			form.setSex(form_list.get(0).getSex());

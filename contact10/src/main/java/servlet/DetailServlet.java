@@ -35,6 +35,13 @@ public class DetailServlet extends HttpServlet {
 
 			//FormDAOクラスに定義したselectByNo（）メソッドを利用して問い合わせ情報を取得します。
 			form = objDao.selectByNo(no);
+			
+			//エラー処理
+			if (form.getNo() == 0) {
+					error = "表示対象の問い合わせが存在しない為、詳細情報は表示できませんでした。";
+					return;
+				}
+			
 
 			//取得し問い合わせ情報を「form」という名前でリクエストスコープに登録します。  
 			request.setAttribute("form", form);

@@ -22,7 +22,7 @@
 			<form action="<%=request.getContextPath()%>/search"
 				class="list-seach">
 				<p>
-					<input type="number" name="no" placeholder="No.を入力">
+					<input type="number" min="0" step="1" name="no" placeholder="No.を入力">
 				</p>
 				<p>
 					<input type="hidden" name="cmd" value="no"><input

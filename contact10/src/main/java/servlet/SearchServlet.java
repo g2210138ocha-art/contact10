@@ -1,3 +1,11 @@
+/*
+ * プログラム名：問い合わせシステム 問い合わせ検索機能
+ * プログラムの説明：問い合わせシステムにおける問い合わせ返信機能に関する処理をおこなうサーブレットクラス
+ * 作成者：吉田春希・中村ほのか
+ * 作成日：2026年6月24日
+ * ページ移動の流れ：list.jsp→SearchServlet.java→list.jsp
+ */
+
 package servlet;
 
 import java.io.IOException;
@@ -23,6 +31,7 @@ public class SearchServlet extends HttpServlet {
 		ArrayList<Form> formList3 = new ArrayList<Form>();
 		ArrayList<Form> formList4 = new ArrayList<Form>();
 
+		//cmd情報を格納する変数
 		String cmd = null;
 
 		try {
@@ -49,25 +58,62 @@ public class SearchServlet extends HttpServlet {
 			//オブジェクト作成
 			FormDAO objDao = new FormDAO();
 
+			//一覧画面で表示する文言の判定(項目）
+			switch (kind) {
+			case 1:
+				strkind = "料金・お支払いについて";
+				break;
+			case 2:
+				strkind = "講座、コース、教材について";
+				break;
+			case 3:
+				strkind = "学習の進め方について";
+				break;
+			case 4:
+				strkind = "受講期限について";
+				break;
+			case 5:
+				strkind = "受講終了後のサポートについて";
+				break;
+			default:
+				strkind = "未選択";
+			}
+
+			//一覧画面で表示する文言の判定(返信状態）
+			if (status == 1) {
+				strstatus = "未返信";
+			} else {
+				strstatus = "返信済";
+			}
+
+			//cmdのデータによって呼び出すメソッドを変える
 			if (cmd.equals("no")) {
 				//noを検索するselectByNoメソッドを呼び出す
 				formList = objDao.searchNo(no);
 				request.setAttribute("form_list", formList);
+				request.setAttribute("cmd", cmd);
+				request.setAttribute("keyword", no);
 
 			} else if (cmd.equals("name")) {
-				//nameとdateを検索するsearchメソッドを呼び出し、戻り値としてformListを取得する
+				//nameとdateを検索するsearchメソッドを呼び出し、戻り値としてformList2を取得する
 				formList2 = objDao.search(keyword);
 				request.setAttribute("form_list", formList2);
+				request.setAttribute("cmd", cmd);
+				request.setAttribute("keyword", keyword);
 
 			} else if (cmd.equals("kind")) {
-				//項目を検索するsearchKindメソッドを呼び出し、戻り値としてformListを取得する
+				//項目を検索するsearchKindメソッドを呼び出し、戻り値としてformList3を取得する
 				formList3 = objDao.searchKind(kind);
 				request.setAttribute("form_list", formList3);
+				request.setAttribute("cmd", cmd);
+				request.setAttribute("keyword", strkind);
 
 			} else {
-				//返信済み、未返信を検索するsearchメソッドを呼び出し、戻り値としてformListを取得する
+				//返信済み、未返信を検索するsearchメソッドを呼び出し、戻り値としてformList4を取得する
 				formList4 = objDao.search(status);
 				request.setAttribute("form_list", formList4);
+				request.setAttribute("cmd", cmd);
+				request.setAttribute("keyword", strstatus);
 			}
 
 			//list.jspにフォワード
@@ -75,7 +121,7 @@ public class SearchServlet extends HttpServlet {
 
 		} catch (IllegalStateException e) {
 			//エラーがあった場合
-			request.setAttribute("error", "DB接続エラーの為、一覧表示は行えませんでした。");
+			request.setAttribute("error", "DB接続エラーの為、検索結果を表示できませんでした。");
 			request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 		}
 	}

@@ -1,7 +1,14 @@
+/*
+ * プログラム名：問い合わせシステム 問い合わせ確認機能
+ * プログラムの説明：問い合わせシステムにおける問い合わせ確認機能に関する処理をおこなうサーブレットクラス
+ * 作成者：髙城 樹里杏
+ * 作成日：2026年6月22日
+ * ページ移動の流れ：form.jsp→ConfiemServlet.java→formConfirm.jsp
+ */
+
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,14 +30,12 @@ public class ConfirmServlet extends HttpServlet {
 		//FormクラスのDTOオブジェクトを生成
 		Form form = new Form();
 
-		ArrayList<Form> form_list = new ArrayList<Form>();
-
-		//③画面からの入力情報を受け取るためのエンコードを設定
+		//画面からの入力情報を受け取るためのエンコードを設定
 		request.setCharacterEncoding("UTF-8");
 
 		try {
 
-			//④画面からの入力情報を取得
+			//画面からの入力情報を取得
 			String name = request.getParameter("name"); //名前
 			String age = request.getParameter("age"); //年齢
 			String strsex = request.getParameter("sex"); //性別
@@ -49,7 +54,7 @@ public class ConfirmServlet extends HttpServlet {
 				kind = Integer.parseInt(strkind);
 			}
 
-			//④Formオブジェクトに格納
+			//Formオブジェクトに値を格納し、formオブジェクトをリストに格納
 			form.setName(name);
 			form.setAge(age);
 			form.setSex(sex);
@@ -57,13 +62,12 @@ public class ConfirmServlet extends HttpServlet {
 			form.setMail(mail);
 			form.setKind(kind);
 			form.setReport(report);
-			form_list.add(form);
 
 			// セッションオブジェクトを取得
 			HttpSession session = request.getSession();
 
 			// セッションに登録
-			session.setAttribute("form_list", form_list);
+			session.setAttribute("form", form);
 
 		} catch (IllegalStateException e) {
 			error = "DB接続エラーの為、問い合わせ内容の確認は行えませんでした。";

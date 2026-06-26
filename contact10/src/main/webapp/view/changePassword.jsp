@@ -11,10 +11,7 @@ User user = (User) session.getAttribute("user");
 	href="<%=request.getContextPath()%>/css/style.css">
 <title>パスワード変更画面</title>
 </head>
-
-<header>
 	<%@include file="/common/headerA.jsp"%>
-</header>
 <body>
 	<div class="title">
 		<h2>パスワード変更</h2>
@@ -52,7 +49,5 @@ User user = (User) session.getAttribute("user");
 		</div>
 	</form>
 </body>
-<footer>
 	<%@include file="/common/footerA.jsp"%>
-</footer>
 </html>

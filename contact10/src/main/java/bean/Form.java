@@ -139,4 +139,49 @@ public class Form {
 		this.response = response;
 	}
 
+	//番号によって性別を判定するメソッド
+	public String getSexText() {
+		switch (this.sex) {
+		case 1:
+			return "男性";
+		case 2:
+			return "女性";
+		case 3:
+			return "その他";
+		default:
+			return "未選択";
+		}
+
+	}
+
+	//番号によって項目を判定するメソッド
+	public String getKindText() {
+		switch (this.kind) {
+		case 1:
+			return "料金・お支払い";
+		case 2:
+			return "講座、コース、教材";
+		case 3:
+			return "学習の進め方";
+		case 4:
+			return "受講期限";
+		case 5:
+			return "受講終了後のサポート";
+		default:
+			return "";
+		}
+
+	}
+
+	//番号によって未返信/返信済を判定するメソッド
+	public String getStatusText() {
+		switch (this.status) {
+		case 2:
+			return "済";
+		default:
+			return "未返信";
+		}
+
+	}
+
 }

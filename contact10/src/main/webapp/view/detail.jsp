@@ -23,36 +23,12 @@ Form form = (Form) request.getAttribute("form");
 		</div>
 		<%
 		//問い合わせ種類
-		String text = "";
-		switch (form.getKind()) {
-		case 1:
-			text = "料金・お支払いについて";
-			break;
-		case 2:
-			text = "講座、コース、教材について";
-			break;
-		case 3:
-			text = "学習の進め方について";
-			break;
-		case 4:
-			text = "受講期限について";
-			break;
-		case 5:
-			text = "受講終了後のサポートについて";
-			break;
-		default:
-			text = "未選択";
-			break;
+		String text = "未選択";
+		if (!form.getKindText().equals("未選択")) {
+			text = form.getKindText() + "について";
 		}
 		//性別表示
-		String sex = "未選択";
-		if (form.getSex() == 1) {
-			sex = "男性";
-		} else if (form.getSex() == 2) {
-			sex = "女性";
-		} else if (form.getSex() == 3) {
-			sex = "その他";
-		}
+		String sex = form.getSexText();
 		//年齢表示
 		String age = "未入力";
 		if (!form.getAge().equals(null) && !form.getAge().isEmpty()) {
@@ -127,6 +103,6 @@ Form form = (Form) request.getAttribute("form");
 		%>
 
 	</section>
-
 </body>
+<%@include file="/common/footerA.jsp"%>
 </html>

@@ -124,7 +124,7 @@ public class FormDAO {
 		return formList;
 	}
 
-	//Noを元にDBのforminfoテーブルから該当データの検索を行うメソッド
+	//Noを元にDBのforminfoテーブルから該当データの検索を行うメソッド(1件のみ)
 	public Form selectByNo(int no) {
 		//変数宣言
 		Connection con = null;
@@ -179,7 +179,7 @@ public class FormDAO {
 		return form;
 	}
 
-	//データベースから指定された問い合わせデータを検索するメソッド
+	//DBから名前、日付を元に問い合わせデータを検索するメソッド
 	public ArrayList<Form> search(String keyword) {
 		//変数宣言
 		Connection con = null;
@@ -232,7 +232,7 @@ public class FormDAO {
 		return formList;
 	}
 
-	//データベースから指定された問い合わせデータを検索するメソッド
+	//noを元にデータベースから指定された問い合わせデータを検索するメソッド(複数件検索)
 	public ArrayList<Form> searchNo(String no) {
 		//変数宣言
 		Connection con = null;
@@ -337,44 +337,6 @@ public class FormDAO {
 		return formList;
 	}
 
-	//返信した際の情報を更新するメソッド
-	public void updateStatus(Form form) {
-		//変数宣言
-		Connection con = null;
-		Statement smt = null;
-
-		//SQL文発行
-		String sql = "UPDATE forminfo SET status=2, responsed_by='" + form.getResponsed_by() + "', updated_at='"
-				+ form.getUpdated_at() + "',response='" + form.getResponse() + "' WHERE no="
-				+ form.getNo();
-
-		try {
-			//変数宣言
-			con = getConnection();
-			smt = con.createStatement();
-
-			//SQLをDBへ発行
-			smt.executeUpdate(sql);
-
-		} catch (Exception e) {
-			throw new IllegalStateException(e);
-		} finally {
-			//リソースの開放
-			if (smt != null) {
-				try {
-					smt.close();
-				} catch (SQLException ignore) {
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException ignore) {
-				}
-			}
-		}
-	}
-
 	//Kindを元にDBのforminfoテーブルから該当データの検索を行うメソッド
 	public ArrayList<Form> searchKind(int kind) {
 		//変数宣言
@@ -427,4 +389,41 @@ public class FormDAO {
 		return formList;
 	}
 
+	//返信した際の情報を更新するメソッド
+	public void updateStatus(Form form) {
+		//変数宣言
+		Connection con = null;
+		Statement smt = null;
+
+		//SQL文発行
+		String sql = "UPDATE forminfo SET status=2, responsed_by='" + form.getResponsed_by() + "', updated_at='"
+				+ form.getUpdated_at() + "',response='" + form.getResponse() + "' WHERE no="
+				+ form.getNo();
+
+		try {
+			//変数宣言
+			con = getConnection();
+			smt = con.createStatement();
+
+			//SQLをDBへ発行
+			smt.executeUpdate(sql);
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			//リソースの開放
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+	}
 }

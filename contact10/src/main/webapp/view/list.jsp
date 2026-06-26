@@ -1,5 +1,11 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.ArrayList,bean.Form,dao.FormDAO"%>
+
+<%
+String cmd = (String) request.getAttribute("cmd");
+String keyword = (String) request.getAttribute("keyword");
+%>
+
 <html>
 <head>
 <link rel="stylesheet"
@@ -15,14 +21,28 @@
 
 	<section>
 		<div class="title">
+			<%
+			if (cmd != null && cmd.isEmpty()) {
+			%>
 			<h2>お問い合わせ一覧</h2>
+			<%
+			} else {
+			%>
+			<h2>お問い合わせ一覧</h2>
+			<p>
+				(検索ワード：<%=keyword%>)
+			</p>
+			<%
+			}
+			%>
 		</div>
 
 		<div class="list">
 			<form action="<%=request.getContextPath()%>/search"
 				class="list-seach">
 				<p>
-					<input type="number" min="0" step="1" name="no" placeholder="No.を入力">
+					<input type="number" min="0" step="1" name="no"
+						placeholder="No.を入力">
 				</p>
 				<p>
 					<input type="hidden" name="cmd" value="no"><input
@@ -79,41 +99,18 @@
 			if (list != null) {
 				for (int i = 0; i < list.size(); i++) {
 					Form form = (Form) list.get(i);
-					String text = "";
-					String lable = "";
+
+					//項目情報の取得、判定
+					String text = form.getKindText();
+					String lable = "lable" + form.getKind();
+
+					//返信済、未返信の取得、判定
 					String color = "";
-					switch (form.getKind()) {
-				case 1 :
-					text = "料金・お支払い";
-					lable = "lable1";
-					break;
-				case 2 :
-					text = "講座、コース、教材";
-					lable = "lable2";
-					break;
-				case 3 :
-					text = "学習の進め方";
-					lable = "lable3";
-					break;
-				case 4 :
-					text = "受講期限";
-					lable = "lable4";
-					break;
-				case 5 :
-					text = "受講終了後のサポート";
-					lable = "lable5";
-					break;
-				default :
-					text = "";
-					lable = "";
-					}
-					String status = "";
-					if (form.getStatus() == 1) {
-				status = "未返信";
+					String status = form.getStatusText();
+					if (status.equals("未返信")) {
 				color = "response_finished";
-					} else {
-				status = "済";
 					}
+					//偶数の時緑の行、奇数の時白の行
 					if (i % 2 != 1) {
 			%>
 			<tr class="list-table-green" onclick="rowClicked(<%=form.getNo()%>)">
@@ -156,5 +153,6 @@
 			%>
 		</table>
 	</section>
+	<%@include file="/common/footerA.jsp"%>
 </body>
 </html>

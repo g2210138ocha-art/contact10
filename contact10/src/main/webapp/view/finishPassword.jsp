@@ -6,9 +6,9 @@
 		<title>パスワード変更完了画面</title>
 	</head>
 	
-	<header>
+
 		<%@include file="/common/headerA.jsp"%>
-	</header>
+	
 	
 	<body>
 		<div class="title">
@@ -24,9 +24,5 @@
 		</div>
 
 	</body>
-	
-	<footer>
 		<%@include file= "/common/footerA.jsp" %>
-	</footer>
-	
 </html>

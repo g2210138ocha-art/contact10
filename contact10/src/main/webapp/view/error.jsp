@@ -10,9 +10,7 @@ String error = (String) request.getAttribute("error");
 <title>エラー画面</title>
 </head>
 
-<header>
 	<%@include file="/common/headerA.jsp"%>
-</header>
 
 <body>
 	<div class="title">
@@ -31,7 +29,5 @@ String error = (String) request.getAttribute("error");
 			type="hidden" name="cmd" value="logout">［ログイン画面に戻る］</a>
 	</div>
 </body>
-<footer>
 	<%@include file="/common/footerA.jsp"%>
-</footer>
 </html>

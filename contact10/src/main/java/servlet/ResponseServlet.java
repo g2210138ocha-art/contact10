@@ -1,3 +1,11 @@
+/*
+ * プログラム名：問い合わせシステム 問い合わせ返信機能
+ * プログラムの説明：問い合わせシステムにおける問い合わせ返信機能に関する処理をおこなうサーブレットクラス
+ * 作成者：中村ほのか
+ * 作成日：2026年6月24日
+ * ページ移動の流れ：response.jsp→ResponseServlet.java→list.jsp
+ */
+
 package servlet;
 
 import java.io.IOException;
@@ -31,6 +39,13 @@ public class ResponseServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 
+		//セッション切れかどうか判定
+		if (user == null) {
+			request.setAttribute("error", "セッション切れの為、問い合わせ返信は行えません。");
+			request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+			return;
+		}
+
 		//FormDAOクラスのオブジェクトを生成します。
 		FormDAO objDao = new FormDAO();
 
@@ -51,13 +66,12 @@ public class ResponseServlet extends HttpServlet {
 			Form form1 = new Form();
 
 			//メールアドレスと、返信用の本文を取得
-			String mail = "system.project.team54@kanda-it-school-system.com";
+			String mail = form.getMail();
 			String content = request.getParameter("response_message");
 
 			//それぞれの値をform1にセットする
 			form1.setNo(no);
-			LocalDateTime now = LocalDateTime.now();//今の日時を取得
-			String date = LocalDateTime.now().toString(); //日時をString型に変換
+			String date = LocalDateTime.now().toString(); //日付を取得し日時をString型に変換
 			form1.setResponsed_by(user.getUserid());
 			form1.setUpdated_at(date);
 			form1.setResponse(content);

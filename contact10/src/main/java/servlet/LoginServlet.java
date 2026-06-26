@@ -1,3 +1,11 @@
+/*
+ * プログラム名：問い合わせシステム ログイン機能
+ * プログラムの説明：問い合わせシステムにおけるログイン機能に関する処理をおこなうサーブレットクラス
+ * 作成者：吉田春希
+ * 作成日：2026年6月22日
+ * ページ移動の流れ：login.jsp→LoginServlet.java→menu.jsp
+ */
+
 package servlet;
 
 import java.io.IOException;
@@ -56,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 				passwordCookie.setMaxAge(60 * 60 * 24 * 1);
 				response.addCookie(passwordCookie);
 
-				//login.jspにフワード
+				//menu.jspにフワード
 				request.getRequestDispatcher("/view/menu.jsp").forward(request, response);
 			}
 		} catch (Exception e) {

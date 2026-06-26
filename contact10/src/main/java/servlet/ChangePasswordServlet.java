@@ -1,3 +1,11 @@
+/*
+ * プログラム名：問い合わせシステム パスワード変更機能
+ * プログラムの説明：問い合わせシステムにおけるパスワード変更機能に関する処理をおこなうサーブレットクラス
+ * 作成者：髙城 樹里杏
+ * 作成日：2026年6月22日
+ * ページ移動の流れ：changePassword.jsp→ChangePasswordServlet.java→finishPassword.jsp
+ */
+
 package servlet;
 
 import java.io.IOException;
@@ -24,10 +32,11 @@ public class ChangePasswordServlet extends HttpServlet {
 		String newPass = null; //新パスワードを格納する変数
 		String newConPass = null; //新確認パスワードを格納する変数
 
+		//画面から送信される情報を受け取るためのエンコードを設定します。
 		request.setCharacterEncoding("UTF-8");
 
 		try {
-			//①セッションから"user"を取得する。
+			//セッションから"user"を取得する。
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute("user");
 
@@ -38,15 +47,12 @@ public class ChangePasswordServlet extends HttpServlet {
 				return;
 			}
 
-			//②画面からの入力データ(パスワード変更情報)を取得する。
+			//画面からの入力データ(パスワード変更情報)を取得する。
 			oldPass = request.getParameter("oldPass");
 			newPass = request.getParameter("newPass");
 			newConPass = request.getParameter("newConPass");
 
-			/*
-			 * ③入力値チェック
-			 */
-
+			//入力値チェック
 			if (oldPass.isEmpty()) {//旧パスワードが未入力
 				error = "旧パスワードを入力して下さい！";
 				return;
@@ -62,30 +68,30 @@ public class ChangePasswordServlet extends HttpServlet {
 			} else if (!newPass.equals(newConPass)) {//新と確認のパスワードとが一致しない
 				error = "新パスワードと確認パスワードが合っていません！";
 				return;
-			} //SQL文の発行に失敗 //error = "クエリ発行に失敗しました。"; //errorCmd = "logout";
+			}
 
-			//④UserDAOクラスをインスタンス化し、関連メソッド（パスワード変更処理）を呼び出す。
+			//UserDAOクラスをインスタンス化し、関連メソッド（パスワード変更処理）を呼び出す。
 			UserDAO objUserDao = new UserDAO();
 			objUserDao.updateForPassword(user.getUserid(), newPass);
 
-			//⑤新パスワードをセッションの"user"に設定し、セッションに再格納する。
+			//新パスワードをセッションの"user"に設定し、セッションに再格納する。
 			user.setPassword(newPass);
 			session.setAttribute("user", user);
 
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException e) { //DB接続エラー発生時
 			error = "DB接続エラーの為、パスワード変更は出来ません。";
 			errorCmd = "logout";
 		} catch (Exception e) {
 			error = "予期せぬエラー";
 		} finally {
 			if (error.equals("")) { //正常処理の遷移
-				request.getRequestDispatcher("/view/finishPassword.jsp").forward(request, response);
+				request.getRequestDispatcher("/view/finishPassword.jsp").forward(request, response); //「finishPassword.jsp」へフォワード
 			} else {
 				request.setAttribute("error", error);
 				if (errorCmd.equals("menu")) {//エラー時の遷移先分岐
-					request.getRequestDispatcher("/view/changePassword.jsp").forward(request, response);
+					request.getRequestDispatcher("/view/changePassword.jsp").forward(request, response); //「changePassword.jsp」へフォワード
 				} else {
-					request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+					request.getRequestDispatcher("/view/error.jsp").forward(request, response); //「error.jsp」へフォワード
 				}
 			}
 		}

@@ -82,8 +82,8 @@ public class ResponseServlet extends HttpServlet {
 			//メール送信用のメソッドを呼び出す
 			sendMail.send("お問い合わせについて(神田英会話スクール)", content, mail);
 
-			//ListServletにフォワード
-			request.getRequestDispatcher("/list").forward(request, response);
+			//responseFinish.jspにフォワード
+			request.getRequestDispatcher("/view/responseFinish.jsp").forward(request, response);
 
 		} catch (IllegalStateException e) {
 			error = "DB接続エラーの為、問い合わせへの返信は行えませんでした。";

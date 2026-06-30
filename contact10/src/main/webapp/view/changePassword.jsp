@@ -11,8 +11,10 @@ User user = (User) session.getAttribute("user");
 	href="<%=request.getContextPath()%>/css/style.css">
 <title>パスワード変更画面</title>
 </head>
-	<%@include file="/common/headerA.jsp"%>
+<%@include file="/common/headerA.jsp"%>
 <body>
+	<a href="<%=request.getContextPath()%>/view/menu.jsp"
+		style="display: inline-block; margin: 2rem 0 -2rem 20rem">メニュー</a>
 	<div class="title">
 		<h2>パスワード変更</h2>
 	</div>
@@ -49,5 +51,5 @@ User user = (User) session.getAttribute("user");
 		</div>
 	</form>
 </body>
-	<%@include file="/common/footerA.jsp"%>
+<%@include file="/common/footerA.jsp"%>
 </html>
